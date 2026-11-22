@@ -1,0 +1,348 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --vice-bg-escuro: #0b0418;
+    --vice-card: rgba(18, 9, 36, 0.88);
+    --vice-rosa: #ff2e93;
+    --vice-laranja: #ff7b54;
+    --vice-ouro: #ffd166;
+    --vice-ciano: #00f0ff;
+    --vice-verde: #00ff9d;
+    --vice-erro: #ff3b6b;
+    --texto-claro: #f8fafc;
+    --texto-suave: #cbd5e1;
+    --tamanho-celula: clamp(22px, 3.6vw, 36px);
+}
+
+body {
+    font-family: 'Montserrat', 'Segoe UI', Tahoma, sans-serif;
+    min-height: 100vh;
+    color: var(--texto-claro);
+    background-color: var(--vice-bg-escuro);
+    background-image:
+        radial-gradient(circle at 12% 10%, rgba(255, 46, 147, 0.28) 0%, transparent 42%),
+        radial-gradient(circle at 88% 14%, rgba(0, 240, 255, 0.22) 0%, transparent 40%),
+        radial-gradient(circle at 50% 100%, rgba(255, 123, 84, 0.25) 0%, transparent 50%),
+        linear-gradient(160deg, #090314 0%, #1a0933 48%, #2b0f3f 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1060px;
+    background: var(--vice-card);
+    backdrop-filter: blur(10px);
+    border-radius: 14px;
+    padding: 14px 20px 16px 20px;
+    border: 1.5px solid rgba(255, 46, 147, 0.4);
+    box-shadow:
+        0 0 28px rgba(255, 46, 147, 0.16),
+        0 0 48px rgba(0, 240, 255, 0.08),
+        0 14px 36px rgba(0, 0, 0, 0.55);
+}
+
+/* Cabeçalho compacto em uma linha para economizar altura */
+.topo-hud {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 123, 84, 0.3);
+}
+
+.titulo-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.tag-edicao {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 2.2px;
+    color: var(--vice-ciano);
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.55);
+}
+
+.topo-hud h1 {
+    font-family: 'Bebas Neue', 'Impact', sans-serif;
+    font-size: clamp(1.45rem, 2.5vw, 2.05rem);
+    letter-spacing: 1.5px;
+    line-height: 1.05;
+    background: linear-gradient(90deg, #ff5ea8 0%, #ff9966 48%, #ffd166 78%, #00f0ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.controles {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.placar {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--vice-ouro);
+    background: rgba(255, 209, 102, 0.1);
+    border: 1px solid rgba(255, 209, 102, 0.35);
+    padding: 6px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.botoes {
+    display: flex;
+    gap: 8px;
+}
+
+.btn {
+    border: none;
+    border-radius: 7px;
+    padding: 7px 15px;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn-primario {
+    background: linear-gradient(135deg, var(--vice-rosa), var(--vice-laranja));
+    color: #ffffff;
+    box-shadow: 0 0 14px rgba(255, 46, 147, 0.45);
+}
+
+.btn-primario:hover {
+    box-shadow: 0 0 20px rgba(255, 46, 147, 0.75);
+}
+
+.btn-secundario {
+    background: rgba(0, 240, 255, 0.08);
+    color: var(--vice-ciano);
+    border: 1px solid rgba(0, 240, 255, 0.5);
+}
+
+.btn-secundario:hover {
+    background: rgba(0, 240, 255, 0.18);
+    box-shadow: 0 0 14px rgba(0, 240, 255, 0.35);
+}
+
+/* Barra compacta de pista selecionada e status */
+.barra-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 8px 0 10px 0;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border-left: 3px solid var(--vice-ciano);
+    min-height: 32px;
+}
+
+.pista-ativa {
+    font-size: 0.8rem;
+    color: var(--texto-claro);
+}
+
+.pista-ativa strong {
+    color: var(--vice-ciano);
+}
+
+.mensagem-status {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--vice-ouro);
+}
+
+.mensagem-status.vitoria {
+    color: var(--vice-verde);
+    text-shadow: 0 0 10px rgba(0, 255, 157, 0.45);
+}
+
+/* Tabuleiro compacto (8 linhas x 22 colunas) */
+.area-tabuleiro {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    padding: 6px 2px 12px 2px;
+}
+
+.tabuleiro {
+    display: grid;
+    grid-template-columns: repeat(22, var(--tamanho-celula));
+    grid-template-rows: repeat(8, var(--tamanho-celula));
+    gap: 3px;
+}
+
+.celula-vazia {
+    width: var(--tamanho-celula);
+    height: var(--tamanho-celula);
+}
+
+.celula-ativa {
+    position: relative;
+    width: var(--tamanho-celula);
+    height: var(--tamanho-celula);
+}
+
+.celula-ativa .numero {
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    font-size: 0.56rem;
+    font-weight: 800;
+    color: var(--vice-ouro);
+    pointer-events: none;
+    line-height: 1;
+    z-index: 2;
+}
+
+.celula-ativa input {
+    width: 100%;
+    height: 100%;
+    border: 1.5px solid rgba(255, 102, 178, 0.45);
+    border-radius: 5px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.75rem, 1.3vw, 1.02rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: rgba(29, 15, 56, 0.92);
+    outline: none;
+    padding-top: 5px;
+    transition: background-color 0.16s, border-color 0.16s, box-shadow 0.16s;
+}
+
+.celula-ativa input.palavra-ativa {
+    background: rgba(0, 240, 255, 0.12);
+    border-color: rgba(0, 240, 255, 0.55);
+}
+
+.celula-ativa input:focus {
+    border-color: var(--vice-ciano);
+    background: rgba(0, 240, 255, 0.22);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+    z-index: 1;
+}
+
+.celula-ativa input.correta {
+    background: rgba(0, 255, 157, 0.18);
+    border-color: var(--vice-verde);
+    color: #b8ffe3;
+    box-shadow: 0 0 8px rgba(0, 255, 157, 0.28);
+}
+
+.celula-ativa input.errada {
+    background: rgba(255, 59, 107, 0.22);
+    border-color: var(--vice-erro);
+    color: #ffd6e0;
+    box-shadow: 0 0 8px rgba(255, 59, 107, 0.28);
+}
+
+/* Pistas abaixo do tabuleiro em duas colunas compactas */
+.area-pistas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    border-top: 1px solid rgba(255, 46, 147, 0.3);
+    padding-top: 10px;
+}
+
+.coluna-pistas h2 {
+    font-family: 'Bebas Neue', 'Impact', sans-serif;
+    font-size: 1.15rem;
+    letter-spacing: 1.6px;
+    color: var(--vice-laranja);
+    margin-bottom: 6px;
+    text-align: left;
+    padding-left: 6px;
+}
+
+.lista-pistas {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.item-pista {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.76rem;
+    line-height: 1.3;
+    color: var(--texto-suave);
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    background: rgba(255, 255, 255, 0.025);
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.item-pista:hover {
+    background: rgba(255, 46, 147, 0.12);
+    color: #ffffff;
+}
+
+.item-pista strong {
+    color: var(--vice-ouro);
+    margin-right: 3px;
+}
+
+.item-pista.pista-selecionada {
+    background: rgba(0, 240, 255, 0.12);
+    border-left-color: var(--vice-ciano);
+    color: #ffffff;
+}
+
+.item-pista.pista-correta {
+    background: rgba(0, 255, 157, 0.12);
+    border-left-color: var(--vice-verde);
+    color: #b8ffe3;
+}
+
+.item-pista.pista-errada {
+    background: rgba(255, 59, 107, 0.14);
+    border-left-color: var(--vice-erro);
+    color: #ffd6e0;
+}
+
+@media (max-width: 820px) {
+    body {
+        align-items: flex-start;
+        padding: 10px 8px;
+    }
+
+    .container {
+        padding: 12px;
+    }
+
+    .area-pistas {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .celula-ativa .numero {
+        font-size: 0.46rem;
+    }
+}
